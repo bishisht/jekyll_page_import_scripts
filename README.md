@@ -1,7 +1,7 @@
 # jekyll_page_import_scripts
 
 ## Overview
-This repository contains scripts to assist in backing up Jekyll-related files and identifying file types in a backup. These scripts help maintain an organized workflow when migrating or managing content in Jekyll projects.
+This repository contains scripts to assist in backing up Jekyll-related files, identifying file types in a backup, moving files into the Jekyll directory structure, and reversing file moves. These scripts help maintain an organized workflow when migrating or managing content in Jekyll projects.
 
 ## Prerequisites
 - Ruby must be installed on your system.
@@ -18,7 +18,7 @@ The `1.backup_script.rb` script is responsible for creating a backup of a specif
 1. Open a terminal.
 2. Navigate to the directory containing the script:
    ```sh
-   cd /Users/bishisht/work/personal_projects/jekyll_page_import_scripts
+   cd <dir_with_these_scripts>
    ```
 3. Run the script with the following command:
    ```sh
@@ -43,7 +43,7 @@ The `2.identify_file_types.rb` script scans the most recent backup directory and
 1. Open a terminal.
 2. Navigate to the directory containing the script:
    ```sh
-   cd /Users/bishisht/work/personal_projects/jekyll_page_import_scripts
+   cd <dir_with_these_scripts>
    ```
 3. Run the script:
    ```sh
@@ -57,9 +57,56 @@ The `2.identify_file_types.rb` script scans the most recent backup directory and
 
 ---
 
+## 3. File Movement Script
+
+### Description
+The `3.1_move_files.rb` script moves files from the latest backup folder into the appropriate locations within a Jekyll project directory based on file extensions.
+
+### Usage
+1. Open a terminal.
+2. Navigate to the directory containing the script:
+   ```sh
+   cd <dir_with_these_scripts>
+   ```
+3. Run the script with the following command:
+   ```sh
+   ruby 3.1_move_files.rb <jekyll_root_directory>
+   ```
+   - Replace `<jekyll_root_directory>` with the root directory of your Jekyll project.
+
+### Output
+- Files from the latest backup are moved to appropriate Jekyll folders.
+- A log file `3.1.file_movement_log.txt` is created, recording the moved files.
+
+---
+
+## 4. Reverse File Movement Script (Not Tested)
+
+### Description
+The `3.2_reverse_file_movement.rb` script is designed to undo file moves performed by `3.1_move_files.rb`. However, this script has **not been tested yet**, so use it with caution.
+
+### Usage
+1. Open a terminal.
+2. Navigate to the directory containing the script:
+   ```sh
+   cd <dir_with_these_scripts>
+   ```
+3. Run the script with the following command:
+   ```sh
+   ruby 3.2_reverse_file_movement.rb <jekyll_root_directory>
+   ```
+   - Replace `<jekyll_root_directory>` with the root directory of your Jekyll project.
+
+### Warning
+- This script is **not tested** and may not work as expected.
+- Verify file movements manually before relying on this script.
+
+---
+
 ## Notes
 - Ensure that you run `1.backup_script.rb` before `2.identify_file_types.rb`, as the latter depends on the backup log.
-- The scripts are intended for use with Jekyll-related files but can be adapted for general backup and file identification purposes.
+- Run `3.1_move_files.rb` only if the backup is correctly identified and categorized.
+- The `3.2_reverse_file_movement.rb` script is untested—use with caution.
 
 ## License
 This project is licensed under the MIT License.
