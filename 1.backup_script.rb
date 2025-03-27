@@ -5,10 +5,10 @@ class BackupScript
   def initialize(source, backup_destination, script_location)
     timestamp = Time.now.strftime('%Y%m%d%H%M') # YYYYMMDDHHMM format
     @source = File.expand_path(source)
-    @backup_destination = File.join(File.expand_path(backup_destination), "#{timestamp}_backup")
+    @backup_destination = File.join(File.expand_path(backup_destination), "backup_#{timestamp}")
     @script_location = File.expand_path(script_location)
     @log_file = File.join(@script_location, "1.backup_script_actions_logs.txt")
-    @info_file = File.join(@script_location, "1.backup_info.txt")
+    @info_file = File.join(@script_location, "1.backed_up_file_info.txt")
   end
 
   def create_backup
