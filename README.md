@@ -1,11 +1,12 @@
 # jekyll_page_import_scripts
 
 ## Overview
-This repository contains scripts to assist in backing up Jekyll-related files, identifying file types in a backup, moving files into the Jekyll directory structure, and reversing file moves. These scripts help maintain an organized workflow when migrating or managing content in Jekyll projects.
+This repository contains scripts to assist in backing up Jekyll-related files, identifying file types in a backup, moving files into the Jekyll directory structure, reversing file moves, and tidying up HTML files. These scripts help maintain an organized workflow when migrating or managing content in Jekyll projects.
 
 ## Prerequisites
 - Ruby must be installed on your system.
 - Ensure you have the necessary permissions to read from source directories and write to backup locations.
+- The `tidy` command-line tool must be installed for the HTML tidy script.
 
 ---
 
@@ -18,7 +19,7 @@ The `1.backup_script.rb` script is responsible for creating a backup of a specif
 1. Open a terminal.
 2. Navigate to the directory containing the script:
    ```sh
-   cd <dir_with_these_scripts>
+   cd /Users/bishisht/work/personal_projects/jekyll_page_import_scripts
    ```
 3. Run the script with the following command:
    ```sh
@@ -43,7 +44,7 @@ The `2.identify_file_types.rb` script scans the most recent backup directory and
 1. Open a terminal.
 2. Navigate to the directory containing the script:
    ```sh
-   cd <dir_with_these_scripts>
+   cd /Users/bishisht/work/personal_projects/jekyll_page_import_scripts
    ```
 3. Run the script:
    ```sh
@@ -66,7 +67,7 @@ The `3.1_move_files.rb` script moves files from the latest backup folder into th
 1. Open a terminal.
 2. Navigate to the directory containing the script:
    ```sh
-   cd <dir_with_these_scripts>
+   cd /Users/bishisht/work/personal_projects/jekyll_page_import_scripts
    ```
 3. Run the script with the following command:
    ```sh
@@ -89,7 +90,7 @@ The `3.2_reverse_file_movement.rb` script is designed to undo file moves perform
 1. Open a terminal.
 2. Navigate to the directory containing the script:
    ```sh
-   cd <dir_with_these_scripts>
+   cd /Users/bishisht/work/personal_projects/jekyll_page_import_scripts
    ```
 3. Run the script with the following command:
    ```sh
@@ -103,10 +104,41 @@ The `3.2_reverse_file_movement.rb` script is designed to undo file moves perform
 
 ---
 
+## 5. HTML Tidy-Up Script
+
+### Description
+The `4.0_tidy_html.rb` script tidies up all HTML files inside the `_pages` directory of a Jekyll project. It uses the `tidy` command-line tool to format and clean the files.
+
+### Prerequisites
+- Ensure that `tidy` is installed on your system. You can install it using:
+  ```sh
+  brew install tidy-html5  # macOS (Homebrew)
+  sudo apt install tidy     # Ubuntu/Debian
+  ```
+
+### Usage
+1. Open a terminal.
+2. Navigate to the directory containing the script:
+   ```sh
+   cd /Users/bishisht/work/personal_projects/jekyll_page_import_scripts
+   ```
+3. Run the script with the following command:
+   ```sh
+   ruby 4.0_tidy_html.rb <_pages_directory>
+   ```
+   - Replace `<_pages_directory>` with the path to the `_pages` folder in your Jekyll project.
+
+### Output
+- All `.html` files inside the `_pages` directory are formatted and cleaned.
+- A log file `4.0.tidy_log.txt` is created, listing all processed files.
+
+---
+
 ## Notes
 - Ensure that you run `1.backup_script.rb` before `2.identify_file_types.rb`, as the latter depends on the backup log.
 - Run `3.1_move_files.rb` only if the backup is correctly identified and categorized.
 - The `3.2_reverse_file_movement.rb` script is untested—use with caution.
+- The `4.0_tidy_html.rb` script requires the `tidy` tool to be installed.
 
 ## License
 This project is licensed under the MIT License.
